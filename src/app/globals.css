@@ -1,0 +1,425 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   FESTORA × LOWKEY TECH 2026 — design system
+   Palette sampled from the supplied Festora lockup: oxblood plate, crimson F,
+   champagne ticket. The signature shape is the ticket notch from the mark.
+   ========================================================================== */
+
+@theme {
+  /* Surfaces */
+  --color-ink: #110609;
+  --color-night: #1a0a0e;
+  --color-oxblood: #2a0d13;
+  --color-oxblood-2: #3a141b;
+  --color-paper: #f2e7d5;
+  --color-paper-2: #e7d7bd;
+
+  /* Brand */
+  --color-crimson: #96182a; /* logo crimson — fills & large type only on dark */
+  --color-ember: #e0485a; /* crimson tuned for text on dark (4.98:1 on ink) */
+  --color-champagne: #e8d0a8; /* logo champagne — primary text on dark (13.3:1) */
+  --color-sand: #b89870;
+
+  /* Text tones */
+  --color-muted: #a8907a; /* 6.58:1 on ink */
+  --color-paper-ink: #2a0d13;
+  --color-paper-muted: #6e5a4a; /* 5.32:1 on paper */
+
+  /* Type */
+  --font-display: var(--font-marcellus), var(--font-rupee-serif), "Times New Roman", serif;
+  --font-sans: var(--font-satoshi), var(--font-rupee-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), var(--font-rupee-mono), ui-monospace, monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-xs: 26rem;
+  --breakpoint-3xl: 112rem;
+}
+
+:root {
+  --gutter: clamp(1.25rem, 4.2vw, 5rem);
+  --section-y: clamp(6rem, 13vw, 12rem);
+  --rule: color-mix(in oklab, var(--color-champagne) 16%, transparent);
+  --rule-strong: color-mix(in oklab, var(--color-champagne) 32%, transparent);
+  --rule-paper: color-mix(in oklab, var(--color-paper-ink) 18%, transparent);
+  --header-h: 4.5rem;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------------------------------------------------------- */
+
+html {
+  background: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-champagne);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "kern";
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-crimson);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+}
+.on-paper :focus-visible {
+  outline-color: var(--color-crimson);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- Type roles ---------------------------------------------------- */
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-feature-settings: "kern", "liga";
+}
+
+/* Mono micro-label — ticket data voice */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility text-mega {
+  font-size: clamp(4.25rem, 17.2vw, 19rem);
+  line-height: 0.8;
+  letter-spacing: -0.035em;
+}
+@utility text-display {
+  font-size: clamp(3rem, 8.4vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+@utility text-h2 {
+  font-size: clamp(2.375rem, 5.6vw, 5.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+@utility text-h3 {
+  font-size: clamp(1.625rem, 2.6vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+@utility text-lede {
+  font-size: clamp(1.25rem, 2.15vw, 1.875rem);
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Layout ------------------------------------------------------- */
+
+@utility shell {
+  width: 100%;
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2vw, 2rem);
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+@utility rule-t {
+  border-top: 1px solid var(--rule);
+}
+@utility rule-b {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ---------- Signature shapes --------------------------------------------- */
+
+/*
+ * The ticket notch: the semicircular bite from the Festora mark, cut into the
+ * left and right edges of an element. --notch controls the radius.
+ */
+@utility notch-x {
+  --notch: 0.5rem;
+  -webkit-mask:
+    radial-gradient(circle at 0 50%, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 50%, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle at 0 50%, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 50%, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) right / 51% 100% no-repeat;
+}
+
+/* Bites on top + bottom edges at a horizontal position (--at). Ticket stub divide. */
+@utility notch-y {
+  --notch: 0.875rem;
+  --at: 70%;
+  -webkit-mask:
+    radial-gradient(circle at var(--at) 0, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at var(--at) 100%, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) bottom / 100% 51% no-repeat;
+  mask:
+    radial-gradient(circle at var(--at) 0, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at var(--at) 100%, #0000 var(--notch), #000 calc(var(--notch) + 0.5px)) bottom / 100% 51% no-repeat;
+}
+
+/* Perforation: a dotted tear line */
+@utility perf-x {
+  height: 2px;
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1.4px);
+  background-size: 9px 2px;
+  background-repeat: repeat-x;
+}
+@utility perf-y {
+  width: 2px;
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1.4px);
+  background-size: 2px 9px;
+  background-repeat: repeat-y;
+}
+
+/* Hairline outlined type for numerals */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px currentColor;
+}
+
+/* ---------- Surfaces ------------------------------------------------------ */
+
+/* Film grain over everything — the textured plate of the Festora lockup */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.on-paper {
+  background: var(--color-paper);
+  color: var(--color-paper-ink);
+  color-scheme: light;
+}
+.on-paper ::selection {
+  background: var(--color-paper-ink);
+  color: var(--color-paper);
+}
+
+/* Fine guilloché-like linework used behind key moments */
+.guilloche {
+  background-image:
+    repeating-radial-gradient(circle at 50% 120%, transparent 0 22px, color-mix(in oklab, var(--color-champagne) 7%, transparent) 22px 23px),
+    repeating-radial-gradient(circle at 50% -20%, transparent 0 22px, color-mix(in oklab, var(--color-crimson) 14%, transparent) 22px 23px);
+}
+
+/* ---------- Components ---------------------------------------------------- */
+
+@layer components {
+/* Ticket button: notched edges, mono label, slides an arrow on hover */
+.btn-ticket {
+  --notch: 0.4375rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  background: var(--color-champagne);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color 450ms var(--ease-out-expo),
+    color 450ms var(--ease-out-expo);
+}
+.btn-ticket:hover {
+  background: var(--color-crimson);
+  color: var(--color-paper);
+}
+.btn-ticket .btn-arrow {
+  transition: transform 450ms var(--ease-out-expo);
+}
+.btn-ticket:hover .btn-arrow {
+  transform: translateX(0.3rem);
+}
+.btn-ticket--sm {
+  min-height: 2.5rem;
+  padding: 0 1.125rem;
+  font-size: 0.6875rem;
+}
+.on-paper .btn-ticket {
+  background: var(--color-paper-ink);
+  color: var(--color-paper);
+}
+.on-paper .btn-ticket:hover {
+  background: var(--color-crimson);
+}
+
+.link-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 500ms var(--ease-out-expo);
+}
+.link-line:hover {
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+}
+
+}
+
+/* Track glyph stroke draw */
+.glyph path,
+.glyph circle,
+.glyph line,
+.glyph polyline,
+.glyph rect {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 900ms var(--ease-out-expo);
+}
+.group:hover .glyph :is(path, circle, line, polyline, rect),
+.group:focus-within .glyph :is(path, circle, line, polyline, rect) {
+  animation: glyph-draw 1100ms var(--ease-out-expo) both;
+}
+@keyframes glyph-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* FAQ disclosure */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-icon {
+  transform: rotate(45deg);
+}
+.faq-icon {
+  transition: transform 450ms var(--ease-out-expo);
+}
+details::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size 500ms var(--ease-out-expo),
+    content-visibility 500ms allow-discrete;
+}
+details[open]::details-content {
+  block-size: auto;
+}
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+/* Marquee */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 48s linear infinite;
+}
+
+@layer components {
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  transition: top 200ms;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+}
+
+/* ---------- Motion preferences ------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ---------- Print (participant guide) ----------------------------------- */
+
+@media print {
+  .grain,
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  body,
+  html {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .print-ink,
+  .print-ink * {
+    color: #111 !important;
+    border-color: #999 !important;
+    background: transparent !important;
+  }
+}
