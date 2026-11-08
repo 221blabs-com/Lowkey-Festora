@@ -46,7 +46,7 @@ Razorpay webhook → /api/razorpay/webhook  (payment.captured / payment.failed)
    - Create a Firestore database.
    - Generate a service-account key (Project settings → Service accounts).
    - Copy `project_id`, `client_email` and `private_key` into the variables.
-5. **Resend:** verify the `221blabs.com` domain and add the API key.
+5. **Resend:** verify the `221blabs.com` domain and add the API key. Optionally add `SMTP_USER`/`SMTP_PASS` (Brevo relay) as a fallback — used automatically only if Resend is unset or a send fails.
 6. Deploy, then make a test payment with `rzp_test_` keys. Switch to `rzp_live_` keys once Razorpay activates your account.
 
 ```bash
