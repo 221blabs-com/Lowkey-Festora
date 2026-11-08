@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FestoraLockup } from '@/components/ui/FestoraLogo';
+import { QrScanner } from '@/components/admin/QrScanner';
 import { formatINR } from '@/lib/format';
 
 type Member = { name: string; email: string; phone: string; ticketId: string; checkedInAt: string | null };
@@ -41,6 +42,7 @@ export function AdminDashboard({ username }: { username: string }) {
   const [toast, setToast] = useState<string | null>(null);
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
+  const [scanning, setScanning] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -148,19 +150,25 @@ export function AdminDashboard({ username }: { username: string }) {
         </div>
 
         {/* Check-in desk */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (code.trim()) checkIn(code.trim()).then(() => setCode(''));
-          }}
-          className="mt-10 flex flex-wrap items-end gap-4 bg-oxblood p-5"
-        >
-          <label className="min-w-[16rem] flex-1">
-            <span className="label text-ember">Check-in desk</span>
-            <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Ticket ID (LT26-…) or scanned ticket link" className="mt-2 w-full border-b border-[var(--rule-strong)] bg-transparent py-2 font-mono outline-none focus:border-champagne" />
-          </label>
-          <button className="btn-ticket btn-ticket--sm notch-x">Check in</button>
-        </form>
+        <div className="mt-10 bg-oxblood p-5">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (code.trim()) checkIn(code.trim()).then(() => setCode(''));
+            }}
+            className="flex flex-wrap items-end gap-4"
+          >
+            <label className="min-w-[16rem] flex-1">
+              <span className="label text-ember">Check-in desk</span>
+              <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Ticket ID (LT26-…) or scanned ticket link" className="mt-2 w-full border-b border-[var(--rule-strong)] bg-transparent py-2 font-mono outline-none focus:border-champagne" />
+            </label>
+            <button type="button" onClick={() => setScanning((v) => !v)} className="label text-champagne hover:text-ember">
+              {scanning ? 'Stop camera' : 'Scan with camera'}
+            </button>
+            <button className="btn-ticket btn-ticket--sm notch-x">Check in</button>
+          </form>
+          <QrScanner active={scanning} onDetect={(ticketId) => checkIn(ticketId)} />
+        </div>
 
         {/* Filters */}
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4">

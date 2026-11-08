@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
           { key: 'Cache-Control', value: 'no-store' },
+          // Only the admin check-in desk's QR scanner needs the camera — re-allow it
+          // here, overriding the site-wide camera=() lockdown above.
+          { key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=(), payment=()' },
         ],
       })),
     ];
