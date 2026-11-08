@@ -11,8 +11,11 @@
  *   - Team size is 2–5 (older drafts said 3–5).
  *   - LinkedIn posting is NOT required; submissions go through the official
  *     Google Form (older drafts asked teams to post on LinkedIn).
- *   - The finale runs December 19–20 (older drafts: "proposed December 19").
+ *   - The finale runs December 20–21 (older drafts: "proposed December 19", then "December 19–20").
  *   - The prize pool is TBA, with up to ₹1,00,000 planned subject to sponsorship.
+ *   - The finale venue is Vanaam Retreat (older drafts: "Sri Sai Luxury Heaven Retreat").
+ *   - The online round narrows to two missions — Small-Business Startup and Better City —
+ *     in place of the earlier eight-track structure (older drafts listed eight tracks).
  *
  * Do not add facts here that are not in the organisers' documents.
  */
@@ -29,13 +32,13 @@ export const EVENT = {
     'Build a useful product, not just a presentation. Identify a genuine problem, create a solution, demonstrate what it does and explain how it could grow into a startup.',
   openChallenge: {
     title: 'Build Your Own AI-Powered Startup.',
-    body: 'Identify a real-world problem and develop an innovative, functional solution. Teams are not restricted to a single prescribed problem statement — choose one of the tracks or use Open Innovation.',
+    body: 'Choose one of the two missions below and develop an innovative, functional solution. Your project must directly address the mission you select.',
   },
   reach: 'Build from anywhere in India. Shortlisted teams meet in Hyderabad.',
   city: 'Hyderabad',
   state: 'Telangana',
   /** Announced in the Online Round Guide; exact address is shared with shortlisted teams. */
-  venue: 'Sri Sai Luxury Heaven Retreat',
+  venue: 'Vanaam Retreat',
   /** Hyderabad city centre — an editorial detail, not the venue location. */
   coordinates: '17.3850° N · 78.4867° E',
 } as const;
@@ -53,7 +56,7 @@ export const MILESTONES = [
     where: 'Remote · anywhere in India',
     start: '2026-12-05T00:00:00+05:30',
     end: '2026-12-07T00:00:00+05:30',
-    body: 'Teams work remotely through a 48-hour challenge window: pick a track, identify a problem, build or advance the solution, and submit through the official LOWKEY TECH Google Form.',
+    body: 'Teams work remotely through a 48-hour challenge window: pick a mission, identify a problem, build or advance the solution, and submit through the official LOWKEY TECH Google Form.',
   },
   {
     id: 'shortlist',
@@ -72,13 +75,13 @@ export const MILESTONES = [
     id: 'finale',
     index: '03',
     label: 'Offline Grand Finale',
-    date: 'December 19–20, 2026',
-    dayRange: ['19', '20'] as const,
+    date: 'December 20–21, 2026',
+    dayRange: ['20', '21'] as const,
     month: 'Dec',
     format: '24-hour in-person build',
     where: 'Hyderabad, Telangana',
-    start: '2026-12-19T00:00:00+05:30',
-    end: '2026-12-21T00:00:00+05:30',
+    start: '2026-12-20T00:00:00+05:30',
+    end: '2026-12-22T00:00:00+05:30',
     body: 'Shortlisted teams come together for a 24-hour startup-building experience: continue building, receive mentorship, prepare final demonstrations and pitch to the judging panel.',
   },
 ] as const;
@@ -132,7 +135,7 @@ export const PRINCIPLES = [
   { title: 'AI-enabled building', body: 'Use AI assistants and modern development tools throughout your workflow.' },
   { title: 'Vibe Coding is allowed', body: 'Teams may use AI-powered coding platforms and workflows.' },
   { title: 'Startup mindset', body: 'Focus on user problems, product value, business potential and scalability.' },
-  { title: 'Creative freedom', body: 'Choose a track, or bring an idea from another domain through Open Innovation.' },
+  { title: 'Creative freedom', body: 'Pick the mission closest to your idea, then solve a real problem — not just describe one.' },
   { title: 'Mentorship & exposure', body: 'Learn from mentors and present your product to the judging panel.' },
   { title: 'Pan-India participation', body: 'The online round is open to teams from all Indian states and union territories.' },
 ] as const;
@@ -145,26 +148,31 @@ export const AUDIENCE = [
   'AI enthusiasts, creators & problem-solvers',
 ] as const;
 
-export type TrackId =
-  | 'health'
-  | 'fintech'
-  | 'cities'
-  | 'edtech'
-  | 'agritech'
-  | 'security'
-  | 'automation'
-  | 'open';
+export type MissionId = 'startup' | 'city';
 
-export const TRACKS: ReadonlyArray<{ id: TrackId; index: string; name: string; body: string }> = [
-  { id: 'health', index: '01', name: 'AI in Healthcare', body: 'Healthcare access, care coordination, health operations and patient support.' },
-  { id: 'fintech', index: '02', name: 'FinTech & Smart Finance', body: 'Financial inclusion, payments, budgeting, fraud awareness and smarter finance.' },
-  { id: 'cities', index: '03', name: 'Smart Cities & Sustainability', body: 'Urban mobility, waste, water, energy and sustainable communities.' },
-  { id: 'edtech', index: '04', name: 'EdTech & Future Learning', body: 'Personalised learning, education access, skills and student productivity.' },
-  { id: 'agritech', index: '05', name: 'AgriTech & Rural Innovation', body: 'Tools for farmers, rural services, supply chains and local economies.' },
-  { id: 'security', index: '06', name: 'Cybersecurity & Digital Safety', body: 'Privacy, security awareness, safer digital services and cyber resilience.' },
-  { id: 'automation', index: '07', name: 'AI & Business Automation', body: 'AI agents, workflow automation, productivity and tools for businesses.' },
-  { id: 'open', index: '08', name: 'Open Innovation', body: 'Any other domain where a team can demonstrate a genuine problem and a useful solution.' },
+/**
+ * Round 1 narrows to exactly two missions — each team selects ONE and its
+ * project must directly address it. Replaces the earlier eight-track list.
+ */
+export const MISSIONS: ReadonlyArray<{ id: MissionId; index: string; name: string; tagline: string; body: string }> = [
+  {
+    id: 'startup',
+    index: '01',
+    name: 'Small-Business Startup',
+    tagline: 'Help shops, vendors, small businesses, and independent workers operate smarter.',
+    body: 'Build a practical digital solution that helps local shops, small businesses and independent vendors operate more efficiently — through inventory, billing, payments, customers and market access.',
+  },
+  {
+    id: 'city',
+    index: '02',
+    name: 'Better City',
+    tagline: 'Improve mobility, waste, water, energy, public services, and everyday urban life.',
+    body: `Build a technology-driven solution that improves everyday urban life and addresses real-world challenges in ${EVENT.city}.`,
+  },
 ];
+
+export const MISSION_TEST = 'Core test: solve a real problem — not just describe one.';
+export const MISSION_FLOW = ['Problem', 'Idea', 'MVP', 'Pitch'] as const;
 
 /** Weights sum to 100. Order follows the Event Guide. */
 export const CRITERIA = [
@@ -178,14 +186,68 @@ export const CRITERIA = [
 
 export const SUBMISSION_CHECKLIST = [
   { item: 'Project title & team details', detail: 'Project name and details of every team member.' },
-  { item: 'Selected track', detail: 'Choose the most relevant track.' },
+  { item: 'Selected mission', detail: 'Small-Business Startup or Better City — your project must directly address it.' },
   { item: 'Problem statement', detail: 'What issue are you addressing, and who experiences it?' },
   { item: 'Proposed solution', detail: 'Explain how your product solves the problem.' },
   { item: 'Project document', detail: 'Objectives, target users, key features, workflow, technology stack, implementation details, expected impact and business potential.' },
   { item: 'Presentation video', detail: 'A clear video presentation in English, submitted as instructed in the Google Form.' },
+  { item: 'AI-generated video', detail: 'A 10-second AI-generated showcase video, with the AI tool used declared.' },
   { item: 'GitHub / repository link', detail: 'If available.' },
   { item: 'Working demo or deployment link', detail: 'Prototype or deployment link, if available.' },
   { item: 'AI usage declaration', detail: 'List the AI tools and platforms used and explain how they contributed.' },
+] as const;
+
+/**
+ * Round 1 submission deliverables (A, B, C), per the Round 1 submission
+ * guidelines. Deliverable C (the AI-generated video) is new to this round.
+ */
+export const SUBMISSION_DELIVERABLES = [
+  {
+    id: 'presentation',
+    label: 'A',
+    title: 'Project Presentation',
+    format: 'PPT / PDF',
+    spec: '8–12 slides',
+    items: [
+      'Problem statement',
+      'Proposed solution',
+      'Target users or audience',
+      'Key features',
+      'AI integration and its purpose',
+      'Technology stack',
+      'Business model or potential impact',
+      'Prototype screenshots or product workflow',
+      'Future scope',
+    ],
+  },
+  {
+    id: 'video',
+    label: 'B',
+    title: 'Video Presentation',
+    format: 'Video Pitch & Demo',
+    spec: '3–5 minutes',
+    items: [
+      'Duration: 3–5 minutes.',
+      'Language: English.',
+      'Must explain the problem, solution, product functionality, AI implementation and expected impact.',
+      'Include a prototype or product demonstration wherever possible.',
+      'Ensure clear audio and understandable visuals.',
+    ],
+  },
+  {
+    id: 'ai-video',
+    label: 'C',
+    title: 'AI-Generated Video',
+    format: 'AI Showcase Video',
+    spec: 'Exactly 10 seconds',
+    items: [
+      'Duration: exactly 10 seconds.',
+      'Must be generated using an AI video-generation tool (e.g. Runway, Kling, Luma, Sora, Hailuo, Pika).',
+      'Should creatively showcase your startup concept, product vision, problem or expected impact.',
+      'Any AI video-generation platform may be used.',
+      'Mandatory: mention the AI tool used in your submission.',
+    ],
+  },
 ] as const;
 
 export const FINALE_DELIVERABLES = [
@@ -234,7 +296,7 @@ export const ACCOMMODATION =
  * Planned finale arc, condensed from the brochure's draft schedule.
  * The Event Guide states the detailed run-of-show is shared separately with
  * shortlisted teams — this is always labelled "planned" in the UI.
- * Times are 24h clock, finale starts 11:00 on Dec 19 and ends 11:00 on Dec 20.
+ * Times are 24h clock, finale starts 11:00 on Dec 20 and ends 11:00 on Dec 21.
  */
 export const FINALE_ARC = [
   { from: '11:00', to: '13:00', title: 'Arrival & inauguration', detail: 'Registration, ID verification, welcome kits, inauguration and a guest talk on AI, startups and entrepreneurship.' },

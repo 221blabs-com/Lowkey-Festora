@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { TEAM, TRACKS } from '@/content/event';
+import { MISSIONS, TEAM } from '@/content/event';
 import { PLATFORM_FEE, TICKET_PRICE, quote } from '@/lib/pricing';
 import { formatINR } from '@/lib/format';
 import { ArrowRight, Plus } from '@/components/ui/Icons';
@@ -127,14 +127,14 @@ export function RegisterForm() {
               <input required minLength={2} maxLength={60} className={input} value={team.city} onChange={(e) => setTeam({ ...team, city: e.target.value })} autoComplete="address-level2" />
             </label>
             <label className="block sm:col-span-2">
-              <span className={fieldLabel}>Track</span>
+              <span className={fieldLabel}>Mission</span>
               <select required className={`${input} appearance-none`} value={team.track} onChange={(e) => setTeam({ ...team, track: e.target.value })}>
                 <option value="" disabled className="bg-ink">
-                  Choose a track
+                  Choose a mission
                 </option>
-                {TRACKS.map((t) => (
-                  <option key={t.id} value={t.name} className="bg-ink">
-                    {t.index} · {t.name}
+                {MISSIONS.map((m) => (
+                  <option key={m.id} value={m.name} className="bg-ink">
+                    {m.index} · {m.name}
                   </option>
                 ))}
               </select>

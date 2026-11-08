@@ -7,7 +7,7 @@ import { SectionHead } from '@/components/ui/SectionHead';
 import { Reveal } from '@/components/ui/Reveal';
 import { Charminar } from '@/components/glyphs/Charminar';
 
-const START_H = 11; // finale opens 11:00 on Dec 19 (planned)
+const START_H = 11; // finale opens 11:00 on Dec 20 (planned)
 const toHours = (t: string) => {
   const [h, m] = t.split(':').map(Number);
   return (h + m / 60 - START_H + 24) % 24;
@@ -84,7 +84,7 @@ function Dial({ active }: { active: number }) {
           {a.from} — {a.to}
         </p>
         <p className="mt-3 font-display text-[clamp(1.25rem,2.2vw,1.875rem)] leading-tight">{a.title}</p>
-        <p className="label mt-3 text-muted">{toHours(a.from) < 13 ? 'Sat · Dec 19' : 'Sun · Dec 20'}</p>
+        <p className="label mt-3 text-muted">{toHours(a.from) < 13 ? 'Sun · Dec 20' : 'Mon · Dec 21'}</p>
       </div>
     </div>
   );
@@ -149,7 +149,7 @@ export function Finale() {
           <div className="col-span-12 lg:col-span-6">
             <div className="lg:sticky lg:top-[calc(var(--header-h)+4vh)]">
               <Dial active={active} />
-              <p className="label mt-6 text-center text-muted">Planned run-of-show · Dec 19, 11:00 → Dec 20, 11:00</p>
+              <p className="label mt-6 text-center text-muted">Planned run-of-show · Dec 20, 11:00 → Dec 21, 11:00</p>
             </div>
           </div>
           <ol className="col-span-12 lg:col-span-5 lg:col-start-8" aria-label="Planned finale schedule">

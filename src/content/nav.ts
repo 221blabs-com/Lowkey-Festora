@@ -1,6 +1,6 @@
 export const NAV = [
   { href: '/#journey', label: 'Journey' },
-  { href: '/#tracks', label: 'Tracks' },
+  { href: '/#tracks', label: 'Missions' },
   { href: '/#judging', label: 'Judging' },
   { href: '/#finale', label: 'Finale' },
   { href: '/#passes', label: 'Passes' },

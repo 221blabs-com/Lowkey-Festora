@@ -14,13 +14,14 @@ export function Recognition() {
         <div className="mt-16 grid-12 gap-y-14 lg:mt-24">
           {/* Prize — stated exactly as the organisers state it */}
           <Reveal className="col-span-12 lg:col-span-7">
-            <div className="relative border border-[var(--rule-strong)] p-[clamp(1.5rem,4vw,3.5rem)]">
+            <div className="@container relative border border-[var(--rule-strong)] p-[clamp(1.5rem,4vw,3.5rem)]">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="label bg-champagne px-2.5 py-1 text-ink">Prize pool · {RECOGNITION.prize.status}</span>
                 <span className="label text-muted">Planned · subject to sponsorship</span>
               </div>
               <p className="mt-8 label text-muted">Up to</p>
-              <p className="font-display text-[clamp(3.5rem,11vw,10rem)] leading-[0.85] tracking-[-0.035em] tabular">{formatINR(RECOGNITION.prize.upTo)}</p>
+              {/* Sized in container-width units (not viewport vw) so the amount always fits this box, however narrow its column gets. */}
+              <p className="font-display text-[clamp(2.5rem,15cqw,8rem)] leading-[0.85] tracking-[-0.035em] tabular">{formatINR(RECOGNITION.prize.upTo)}</p>
               <p className="mt-8 max-w-[54ch] text-muted">{RECOGNITION.prize.note}</p>
             </div>
           </Reveal>

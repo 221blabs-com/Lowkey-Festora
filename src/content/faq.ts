@@ -38,7 +38,7 @@ export const FAQ: ReadonlyArray<FaqGroup> = [
     items: [
       {
         q: 'Can we choose any problem?',
-        a: 'Yes. Choose one of the listed tracks or use Open Innovation, provided your project addresses a genuine problem.',
+        a: 'No — select one of the two missions, Small-Business Startup or Better City, and address a genuine problem within it. Your project must directly address the mission you select.',
       },
       {
         q: 'Is Vibe Coding allowed? Can we use ChatGPT or other AI tools?',
@@ -64,7 +64,7 @@ export const FAQ: ReadonlyArray<FaqGroup> = [
     items: [
       {
         q: 'What must the online submission contain?',
-        a: 'Team and project details, selected track, problem statement, proposed solution, project document, an English presentation video, available repository/demo links and an AI usage declaration.',
+        a: 'Team and project details, selected mission, problem statement, proposed solution, a project presentation deck (8–12 slides), an English presentation video (3–5 minutes), a 10-second AI-generated showcase video, available repository/demo links and an AI usage declaration.',
       },
       {
         q: 'How do we submit? Do we need to post on LinkedIn?',
@@ -94,7 +94,7 @@ export const FAQ: ReadonlyArray<FaqGroup> = [
     items: [
       {
         q: 'When and where is the finale?',
-        a: 'December 19–20, 2026 in Hyderabad, at Sri Sai Luxury Heaven Retreat. The exact address and on-ground reporting instructions are shared with shortlisted teams.',
+        a: 'December 20–21, 2026 in Hyderabad, at Vanaam Retreat. The exact address and on-ground reporting instructions are shared with shortlisted teams.',
       },
       {
         q: 'What does the offline fee cover?',

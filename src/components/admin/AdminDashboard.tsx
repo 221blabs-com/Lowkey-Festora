@@ -187,7 +187,7 @@ export function AdminDashboard({ username }: { username: string }) {
           <table className="w-full min-w-[56rem] text-left text-[0.9375rem]">
             <thead>
               <tr className="label text-muted">
-                {['Team', 'College · City', 'Track', 'Size', 'Amount', 'Status', 'Created', ''].map((h) => (
+                {['Team', 'College · City', 'Mission', 'Size', 'Amount', 'Status', 'Created', ''].map((h) => (
                   <th key={h} className="py-3 pr-4 font-medium">
                     {h}
                   </th>

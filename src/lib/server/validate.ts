@@ -1,4 +1,4 @@
-import { TEAM, TRACKS } from '@/content/event';
+import { MISSIONS, TEAM } from '@/content/event';
 import type { NewRegistration } from './registrations';
 
 const clean = (v: unknown, max: number) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim().slice(0, max) : '');
@@ -15,7 +15,7 @@ export function validateRegistration(body: unknown): { ok: true; data: NewRegist
   if (teamName.length < 2) return { ok: false, error: 'Enter a team name.' };
   if (college.length < 2) return { ok: false, error: 'Enter your college or organisation.' };
   if (city.length < 2) return { ok: false, error: 'Enter your city.' };
-  if (!TRACKS.some((t) => t.name === track)) return { ok: false, error: 'Choose a track.' };
+  if (!MISSIONS.some((m) => m.name === track)) return { ok: false, error: 'Choose a mission.' };
   if (b.consent !== true) return { ok: false, error: 'Please accept the event rules and fee policy.' };
 
   const raw = Array.isArray(b.members) ? b.members : [];

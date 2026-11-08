@@ -159,7 +159,7 @@ export function Passes() {
               fee={FEES.online.platformFee}
               team={team}
               note={FEES.online.note + '.'}
-              includes={['48-hour challenge', 'All eight tracks', 'E-Certificate eligibility']}
+              includes={['48-hour challenge', 'Two missions', 'E-Certificate eligibility']}
               stub="Dec 05–06 · Online"
             />
           </Reveal>
@@ -175,7 +175,7 @@ export function Passes() {
               team={team}
               note={FEES.finale.note + '.'}
               includes={FEES.finaleCovers}
-              stub="Dec 19–20 · Hyderabad"
+              stub="Dec 20–21 · Hyderabad"
             />
           </Reveal>
         </div>

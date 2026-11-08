@@ -18,7 +18,7 @@ export async function GET(req: Request) {
   try {
     const status = new URL(req.url).searchParams.get('status') || 'paid';
     const regs = (await listRegistrations()).filter((r) => status === 'all' || r.status === status);
-    const header = ['Registration ID', 'Status', 'Team', 'College', 'City', 'Track', 'Role', 'Name', 'Email', 'Phone', 'Ticket ID', 'Checked in', 'Team total (INR)', 'Platform fee (INR)', 'Payment ID', 'Paid at', 'Created at'];
+    const header = ['Registration ID', 'Status', 'Team', 'College', 'City', 'Mission', 'Role', 'Name', 'Email', 'Phone', 'Ticket ID', 'Checked in', 'Team total (INR)', 'Platform fee (INR)', 'Payment ID', 'Paid at', 'Created at'];
     const rows = regs.flatMap((r) =>
       r.members.map((m, i) => [r.id, r.status, r.teamName, r.college, r.city, r.track, i === 0 ? 'Leader' : 'Member', m.name, m.email, m.phone, m.ticketId, m.checkedInAt ?? '', r.amount.total, r.amount.fees, r.razorpayPaymentId ?? '', r.paidAt ?? '', r.createdAt]),
     );

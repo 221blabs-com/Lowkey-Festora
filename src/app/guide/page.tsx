@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import {
   ACCOMMODATION, AI_POLICY, AUDIENCE, BRING, CONDUCT, CONTACT, CRITERIA, DOWNLOADS, EVENT, FACILITIES, FEES,
-  FINALE_DELIVERABLES, IP_POLICY, MILESTONES, PREBUILT_POLICY, PRINCIPLES, PRIVACY_POLICY, RECOGNITION, SUBMISSION_CHECKLIST, TEAM, TRACKS,
+  FINALE_DELIVERABLES, IP_POLICY, MILESTONES, MISSION_TEST, MISSIONS, PREBUILT_POLICY, PRINCIPLES, PRIVACY_POLICY, RECOGNITION,
+  SUBMISSION_CHECKLIST, SUBMISSION_DELIVERABLES, TEAM,
 } from '@/content/event';
 import { FAQ } from '@/content/faq';
 import { formatINR } from '@/lib/format';
@@ -12,7 +13,7 @@ import { TicketButton } from '@/components/ui/TicketButton';
 
 export const metadata: Metadata = {
   title: 'Participant guide',
-  description: `Everything about ${EVENT.fullName}: dates, fees, teams, tracks, submission checklist, AI policy, finale logistics, judging, rules and FAQs.`,
+  description: `Everything about ${EVENT.fullName}: dates, fees, teams, missions, submission checklist, AI policy, finale logistics, judging, rules and FAQs.`,
   alternates: { canonical: '/guide' },
 };
 
@@ -20,7 +21,7 @@ const SECTIONS = [
   { id: 'overview', title: 'Overview' },
   { id: 'dates', title: 'Dates & fees' },
   { id: 'teams', title: 'Teams & eligibility' },
-  { id: 'tracks', title: 'Tracks' },
+  { id: 'tracks', title: 'Missions' },
   { id: 'submission', title: 'Online submission' },
   { id: 'ai', title: 'AI tools & pre-built work' },
   { id: 'finale', title: 'The finale' },
@@ -149,23 +150,37 @@ export default function GuidePage() {
             <List items={TEAM.rules} />
           </Part>
 
-          <Part id="tracks" n={4} title="Tracks">
-            <List ordered items={TRACKS.map((t) => (<><strong className="font-medium text-champagne">{t.name}.</strong> <span className="text-muted">{t.body}</span></>))} />
-            <Note>
-              <strong className="font-medium text-champagne">Open challenge — {EVENT.openChallenge.title}</strong> {EVENT.openChallenge.body}
-            </Note>
+          <Part id="tracks" n={4} title="Missions">
+            <p>
+              Each team selects <strong className="font-medium text-champagne">ONE</strong> mission, and the project must directly address it. {MISSION_TEST}
+            </p>
+            <List ordered items={MISSIONS.map((m) => (<><strong className="font-medium text-champagne">{m.name}.</strong> <span className="text-muted">{m.body}</span></>))} />
           </Part>
 
           <Part id="submission" n={5} title="Online submission">
             <p>
-              During the 48-hour window ({MILESTONES[0].date}) each team selects a track, identifies a problem, builds or advances its solution, and submits the required materials through
+              During the 48-hour window ({MILESTONES[0].date}) each team selects a mission, identifies a problem, builds or advances its solution, and submits the required materials through
               the <strong className="font-medium text-champagne">official LOWKEY TECH Google Form</strong>. The organisers share the form link and deadline with registered teams.
             </p>
             <h3 className="label pt-2 text-muted">Submission checklist</h3>
             <List ordered items={SUBMISSION_CHECKLIST.map((s) => (<><strong className="font-medium text-champagne">{s.item}.</strong> <span className="text-muted">{s.detail}</span></>))} />
+            <h3 className="label pt-2 text-muted">Submission deliverables (A, B, C)</h3>
+            <div className="grid gap-px bg-[var(--rule)] sm:grid-cols-3">
+              {SUBMISSION_DELIVERABLES.map((d) => (
+                <div key={d.id} className="bg-ink py-6 sm:px-6 sm:first:pl-0">
+                  <p className="label text-ember">{d.label} · {d.title}</p>
+                  <p className="mt-2 text-[0.9375rem] text-muted">{d.format} · {d.spec}</p>
+                  <ul className="mt-4 space-y-2 text-[0.9375rem] text-muted">
+                    {d.items.map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
             <Note>
-              The presentation video and project document must be submitted through the Google Form. LinkedIn posting or tagging is not required, and LinkedIn posts are not official
-              submissions. Before submitting, verify team details, document and video links, video permissions and the AI declaration, and keep your submission confirmation.
+              The presentation video, AI-generated video and project document must be submitted through the Google Form. LinkedIn posting or tagging is not required, and LinkedIn posts are
+              not official submissions. Before submitting, verify team details, document and video links, video permissions and the AI declaration, and keep your submission confirmation.
             </Note>
             <p className="text-muted">Late or incomplete submissions may be disqualified.</p>
           </Part>

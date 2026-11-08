@@ -8,7 +8,7 @@ import { SiteChrome } from '@/components/site/SiteChrome';
 import { EVENT } from '@/content/event';
 import { SITE_URL } from '@/lib/config';
 
-const description = `${EVENT.summary} Online round December 5–6, 2026 · Grand finale December 19–20 in Hyderabad. Register your team on Festora.`;
+const description = `${EVENT.summary} Online round December 5–6, 2026 · Grand finale December 20–21 in Hyderabad. Register your team on Festora.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

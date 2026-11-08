@@ -215,7 +215,7 @@ function drawFront(ctx: CanvasRenderingContext2D, mode: Mode, fonts: Fonts, mark
   const cols = [
     { k: 'ROUND 01 · ONLINE', v: 'DEC 05–06', s: '48 HOURS · REMOTE' },
     { k: 'SHORTLIST', v: 'DEC 16', s: 'ANNOUNCED' },
-    { k: 'ROUND 02 · FINALE', v: 'DEC 19–20', s: '24 HOURS · HYDERABAD' },
+    { k: 'ROUND 02 · FINALE', v: 'DEC 20–21', s: '24 HOURS · HYDERABAD' },
   ];
   const colW = mainW / 3;
   cols.forEach((c, i) => {

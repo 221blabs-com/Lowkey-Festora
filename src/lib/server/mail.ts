@@ -132,7 +132,7 @@ ${label('Key dates')}${eventBlock()}`,
       layout(
         'New registration',
         `${label('New paid registration')}${h1(esc(r.teamName))}
-${p(`${esc(r.college)} · ${esc(r.city)} · Track: ${esc(r.track)}`)}
+${p(`${esc(r.college)} · ${esc(r.city)} · Mission: ${esc(r.track)}`)}
 ${receiptTable(r)}
 ${r.members.map((m) => muted(`${esc(m.name)} · ${esc(m.email)} · ${esc(m.phone)} · ${m.ticketId}`)).join('')}
 <div>${button(`${SITE_URL}/admin.html`, 'Open admin')}</div>`,
